@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}       
+    <div class="container">
+        <div class="card">
+            <div class="card-header text-white bg-dark"> {{ titulo }}</div>
+            <div class="card-body">
+                <p class="lead">
+                    <a class="btn btn-dark btn-sm" href='{{ path('usuario.listar') }}' role="button">volver</a>
+                </p>
+                {{ form_start(form, {'action': path('usuario.guardar'),'enctype':'multipart/form-data', 'attr': {'class': 'form-horizontal', 'role': 'form'}}) }}
+                <div class="form-group {% if not form.nombre.vars.valid %}has-error{% endif %}">
+                    {{ form_label(form.nombre, null, {'label_attr': {'class': 'control-label '}}) }}
+
+                    {{ form_widget(form.nombre, {'attr': {'class': 'form-control'}}) }}
+
+                    <div style="color: red">{{ form_errors(form.nombre) }}</div>
+                </div>
+                 
+                <div class="form-group"> 
+                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary', 'role': 'button'}}) }}
+                </div>
+                {{ form_end(form) }}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

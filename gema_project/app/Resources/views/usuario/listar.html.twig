@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="card">
+            <div class="card-header text-white bg-dark"> {{ titulo }}</div>
+            <div class="card-body">
+                <p class="lead">
+                    <a class="btn btn-primary  btn-sm" href='{{ path('usuario.crear') }}' role="button">crear (+)</a>
+                </p>              
+                <br/>
+
+                {% for i in 0..2 %}
+                    <div class="card">
+
+                        {% if i==0 %}
+                            <div class="card-header text-white bg-dark">Usuarios activos</div>
+                        {% elseif i==1 %}
+                            <div class="card-header text-white bg-dark">Usuarios inactivos</div>
+                        {%else%}
+                            <div class="card-header text-white bg-dark">Usuarios en espera</div>
+                        {% endif%}
+                        <div class="card-body">
+                            <div class="table-responsive">                   
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Email</th>
+                                            <th>Nombre</th>
+                                            <th>Apellido</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if i==0 %}
+                                            {% for usuario in usuarios if usuario.codigo ==1%}
+                                                <tr>          
+                                                    <td>{{ usuario.nombre }}</td>
+                                                    <td>{{ usuario.apellido }}</td> 
+                                                    <td>{{ usuario.email }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% elseif i==1 %}
+                                            {% for usuario in usuarios if usuario.codigo ==2%}
+                                                <tr>          
+                                                    <td>{{ usuario.nombre }}</td>
+                                                    <td>{{ usuario.apellido }}</td> 
+                                                    <td>{{ usuario.email }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        {%else%}
+                                            {% for usuario in usuarios if usuario.codigo ==3%}
+                                                <tr>          
+                                                    <td>{{ usuario.nombre }}</td>
+                                                    <td>{{ usuario.apellido }}</td> 
+                                                    <td>{{ usuario.email }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% endif%}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}            
+            </div>
+        </div>
+    </div>
+{% endblock %}
